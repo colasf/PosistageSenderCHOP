@@ -1,6 +1,8 @@
 # PosistageSenderCHOP
 Posistagenet sender chop for touchdesigner plugin.
 
+![node](https://github.com/colasf/PosistageSenderCHOP/blob/master/image/node.PNG?raw=true)
+
 ## Input channels need to be named :
 Translation : tx ty tz
 Rotation : rx ry rz
