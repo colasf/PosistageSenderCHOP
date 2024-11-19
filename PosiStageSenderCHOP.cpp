@@ -141,32 +141,32 @@ PosiStageSenderCHOP::execute(CHOP_Output* output,
 				trackers[i] = ::psn::tracker(i, "");
 				for (int j = 0; j < cinput->numChannels; j++) {
 					// translate
-					if (std::strcmp(cinput->getChannelName(j), "tx") != 0) pos.x = cinput->getChannelData(j)[i];
-					if (std::strcmp(cinput->getChannelName(j), "ty") != 0) pos.y = cinput->getChannelData(j)[i];
-					if (std::strcmp(cinput->getChannelName(j), "tz") != 0) pos.z = cinput->getChannelData(j)[i];
+					if (std::strcmp(cinput->getChannelName(j), "tx") == 0) pos.x = cinput->getChannelData(j)[i];
+					if (std::strcmp(cinput->getChannelName(j), "ty") == 0) pos.y = cinput->getChannelData(j)[i];
+					if (std::strcmp(cinput->getChannelName(j), "tz") == 0) pos.z = cinput->getChannelData(j)[i];
 
 					// orientation
-					if (std::strcmp(cinput->getChannelName(j), "rx") != 0) ori.x = cinput->getChannelData(j)[i];
-					if (std::strcmp(cinput->getChannelName(j), "ry") != 0) ori.y = cinput->getChannelData(j)[i];
-					if (std::strcmp(cinput->getChannelName(j), "rz") != 0) ori.z = cinput->getChannelData(j)[i];
+					if (std::strcmp(cinput->getChannelName(j), "rx") == 0) ori.x = cinput->getChannelData(j)[i];
+					if (std::strcmp(cinput->getChannelName(j), "ry") == 0) ori.y = cinput->getChannelData(j)[i];
+					if (std::strcmp(cinput->getChannelName(j), "rz") == 0) ori.z = cinput->getChannelData(j)[i];
 
 					// speed
-					if (std::strcmp(cinput->getChannelName(j), "speedx") != 0) speed.x = cinput->getChannelData(j)[i];
-					if (std::strcmp(cinput->getChannelName(j), "speedy") != 0) speed.y = cinput->getChannelData(j)[i];
-					if (std::strcmp(cinput->getChannelName(j), "speedz") != 0) speed.z = cinput->getChannelData(j)[i];
+					if (std::strcmp(cinput->getChannelName(j), "speedx") == 0) speed.x = cinput->getChannelData(j)[i];
+					if (std::strcmp(cinput->getChannelName(j), "speedy") == 0) speed.y = cinput->getChannelData(j)[i];
+					if (std::strcmp(cinput->getChannelName(j), "speedz") == 0) speed.z = cinput->getChannelData(j)[i];
 
 					// acceleration
-					if (std::strcmp(cinput->getChannelName(j), "ax") != 0) accel.x = cinput->getChannelData(j)[i];
-					if (std::strcmp(cinput->getChannelName(j), "ay") != 0) accel.y = cinput->getChannelData(j)[i];
-					if (std::strcmp(cinput->getChannelName(j), "az") != 0) accel.z = cinput->getChannelData(j)[i];
+					if (std::strcmp(cinput->getChannelName(j), "ax") == 0) accel.x = cinput->getChannelData(j)[i];
+					if (std::strcmp(cinput->getChannelName(j), "ay") == 0) accel.y = cinput->getChannelData(j)[i];
+					if (std::strcmp(cinput->getChannelName(j), "az") == 0) accel.z = cinput->getChannelData(j)[i];
 
 					// target
-					if (std::strcmp(cinput->getChannelName(j), "targetx") != 0) target.x = cinput->getChannelData(j)[i];
-					if (std::strcmp(cinput->getChannelName(j), "targety") != 0) target.y = cinput->getChannelData(j)[i];
-					if (std::strcmp(cinput->getChannelName(j), "targetz") != 0) target.z = cinput->getChannelData(j)[i];
+					if (std::strcmp(cinput->getChannelName(j), "targetx") == 0) target.x = cinput->getChannelData(j)[i];
+					if (std::strcmp(cinput->getChannelName(j), "targety") == 0) target.y = cinput->getChannelData(j)[i];
+					if (std::strcmp(cinput->getChannelName(j), "targetz") == 0) target.z = cinput->getChannelData(j)[i];
 
 					// id
-					if (std::strcmp(cinput->getChannelName(j), "id") != 0) {
+					if (std::strcmp(cinput->getChannelName(j), "id") == 0) {
 						id = (int)cinput->getChannelData(j)[i];
 					}
 					else
