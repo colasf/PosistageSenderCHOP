@@ -130,50 +130,38 @@ PosiStageSenderCHOP::execute(CHOP_Output* output,
 		::psn::tracker_map trackers;
 		const OP_CHOPInput* cinput = inputs->getInputCHOP(0);
 		if (cinput->numChannels >= 1) {
-			::psn::float3 pos;
-			::psn::float3 ori;
-			::psn::float3 speed;
-			::psn::float3 accel;
-			::psn::float3 target;
-			int id;
-			float pos_ty = 0.0;
 			for (int i = 0; i < cinput->numSamples; i++) {
-				trackers[i] = ::psn::tracker(i, "");
+				int id = i;
+				::psn::float3 pos;
+				::psn::float3 ori;
+				::psn::float3 speed;
+				::psn::float3 accel;
+				::psn::float3 target;
 				for (int j = 0; j < cinput->numChannels; j++) {
-					// translate
-					if (std::strcmp(cinput->getChannelName(j), "tx") == 0) pos.x = cinput->getChannelData(j)[i];
-					if (std::strcmp(cinput->getChannelName(j), "ty") == 0) pos.y = cinput->getChannelData(j)[i];
-					if (std::strcmp(cinput->getChannelName(j), "tz") == 0) pos.z = cinput->getChannelData(j)[i];
+					const char* chanName = cinput->getChannelName(j);
+					float value = cinput->getChannelData(j)[i];
 
-					// orientation
-					if (std::strcmp(cinput->getChannelName(j), "rx") == 0) ori.x = cinput->getChannelData(j)[i];
-					if (std::strcmp(cinput->getChannelName(j), "ry") == 0) ori.y = cinput->getChannelData(j)[i];
-					if (std::strcmp(cinput->getChannelName(j), "rz") == 0) ori.z = cinput->getChannelData(j)[i];
-
-					// speed
-					if (std::strcmp(cinput->getChannelName(j), "speedx") == 0) speed.x = cinput->getChannelData(j)[i];
-					if (std::strcmp(cinput->getChannelName(j), "speedy") == 0) speed.y = cinput->getChannelData(j)[i];
-					if (std::strcmp(cinput->getChannelName(j), "speedz") == 0) speed.z = cinput->getChannelData(j)[i];
-
-					// acceleration
-					if (std::strcmp(cinput->getChannelName(j), "ax") == 0) accel.x = cinput->getChannelData(j)[i];
-					if (std::strcmp(cinput->getChannelName(j), "ay") == 0) accel.y = cinput->getChannelData(j)[i];
-					if (std::strcmp(cinput->getChannelName(j), "az") == 0) accel.z = cinput->getChannelData(j)[i];
-
-					// target
-					if (std::strcmp(cinput->getChannelName(j), "targetx") == 0) target.x = cinput->getChannelData(j)[i];
-					if (std::strcmp(cinput->getChannelName(j), "targety") == 0) target.y = cinput->getChannelData(j)[i];
-					if (std::strcmp(cinput->getChannelName(j), "targetz") == 0) target.z = cinput->getChannelData(j)[i];
-
-					// id
-					if (std::strcmp(cinput->getChannelName(j), "id") == 0) {
-						id = (int)cinput->getChannelData(j)[i];
-					}
-					else
-					{
-						id = i;
+					if (std::strcmp(chanName, "tx") == 0) pos.x = value;
+					else if (std::strcmp(chanName, "ty") == 0) pos.y = value;
+					else if (std::strcmp(chanName, "tz") == 0) pos.z = value;
+					else if (std::strcmp(chanName, "rx") == 0) ori.x = value;
+					else if (std::strcmp(chanName, "ry") == 0) ori.y = value;
+					else if (std::strcmp(chanName, "rz") == 0) ori.z = value;
+					else if (std::strcmp(chanName, "speedx") == 0) speed.x = value;
+					else if (std::strcmp(chanName, "speedy") == 0) speed.y = value;
+					else if (std::strcmp(chanName, "speedz") == 0) speed.z = value;
+					else if (std::strcmp(chanName, "ax") == 0) accel.x = value;
+					else if (std::strcmp(chanName, "ay") == 0) accel.y = value;
+					else if (std::strcmp(chanName, "az") == 0) accel.z = value;
+					else if (std::strcmp(chanName, "targetx") == 0) target.x = value;
+					else if (std::strcmp(chanName, "targety") == 0) target.y = value;
+					else if (std::strcmp(chanName, "targetz") == 0) target.z = value;
+					else if (std::strcmp(chanName, "id") == 0) {
+						id = (int)value; // Assign id only when channel name is "id"
 					}
 				}
+
+				trackers[i] = ::psn::tracker(id, "");
 				trackers[i].set_pos(pos);
 				trackers[i].set_ori(ori);
 				trackers[i].set_speed(speed);
