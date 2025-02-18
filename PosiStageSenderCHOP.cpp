@@ -161,14 +161,14 @@ PosiStageSenderCHOP::execute(CHOP_Output* output,
 					}
 				}
 
-				trackers[i] = ::psn::tracker(id, "");
-				trackers[i].set_pos(pos);
-				trackers[i].set_ori(ori);
-				trackers[i].set_speed(speed);
-				trackers[i].set_accel(accel);
-				trackers[i].set_target_pos(target);
-				trackers[i].set_id(id);
-				trackers[i].set_status(i / 10.0f);
+				auto& tracker = trackers[id];
+				tracker.set_pos(pos);
+				tracker.set_ori(ori);
+				tracker.set_speed(speed);
+				tracker.set_accel(accel);
+				tracker.set_target_pos(target);
+				tracker.set_id(id);
+				tracker.set_status(i / 10.0f);
 			}
 
 			{
